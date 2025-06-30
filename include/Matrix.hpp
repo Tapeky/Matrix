@@ -1,0 +1,31 @@
+#ifndef MATRIX_HPP
+#define MATRIX_HPP
+
+# include <vector>
+# include <iostream>
+
+template<typename T>
+class Matrix {
+	private:
+		std::vector<T> data_;
+		size_t rows_;
+		size_t cols_;
+	
+	public:
+		Matrix();
+		Matrix(size_t rows, size_t cols);
+		Matrix(size_t rows, size_t cols, T value);
+
+		T& operator()(size_t i, size_t j);
+		const T& operator()(size_t i, size_t j) const;
+
+		size_t	getRows() const { return rows_ ;}
+		size_t	getCols() const { return cols_ ;}
+		bool	isSquare() const { return cols_ == rows_ ;}
+		void	print() const;	
+
+};
+
+#include "../src/Matrix.tpp"
+
+#endif
