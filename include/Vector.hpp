@@ -30,7 +30,13 @@ class Vector {
 			}
 			std::cout << "]";
 		}
+
+		// Ex00 operations
+		void add(const Vector<T>& other);
+		void sub(const Vector<T>& other);
+		void scl(T scalar);
 };
 
+#include "../src/Vector.tpp"
 
 #endif

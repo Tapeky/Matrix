@@ -1,13 +1,13 @@
 #include "Matrix.hpp"
 
 template<typename T>
-Matrix<T>::Matrix() : rows_(0), cols_(0) {}
+Matrix<T>::Matrix() : data_(), rows_(0), cols_(0) {}
 
 template<typename T>
-Matrix<T>::Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols) , data_(rows * cols) {}
+Matrix<T>::Matrix(size_t rows, size_t cols) : data_(rows * cols), rows_(rows), cols_(cols) {}
 
 template<typename T>
-Matrix<T>::Matrix(size_t rows, size_t cols, T value) : rows_(rows), cols_(cols) , data_(rows * cols, value) {}
+Matrix<T>::Matrix(size_t rows, size_t cols, T value) : data_(rows * cols, value), rows_(rows), cols_(cols) {}
 
 template<typename T> // Write
 T& Matrix<T>::operator()(size_t i, size_t j) {
@@ -29,4 +29,29 @@ void Matrix<T>::print() const {
 		}
 		std::cout << ']' << std::endl;
 	}
+}
+
+// Ex00 operations
+template<typename T>
+void Matrix<T>::add(const Matrix<T>& other) {
+	if (rows_ != other.rows_ || cols_ != other.cols_) throw std::invalid_argument("Dimensions incompatibles.");
+	if (data_.size() == 0) throw std::invalid_argument("Les matrices sont vides.");
+	
+	for (size_t i = 0; i < data_.size(); i++)
+		data_[i] += other.data_[i];
+}
+
+template<typename T>
+void Matrix<T>::sub(const Matrix<T>& other) {
+	if (rows_ != other.rows_ || cols_ != other.cols_) throw std::invalid_argument("Dimensions incompatibles.");
+	if (data_.size() == 0) throw std::invalid_argument("Les matrices sont vides.");
+
+	for (size_t i = 0; i < data_.size(); i++)
+		data_[i] -= other.data_[i];
+}
+
+template<typename T>
+void Matrix<T>::scl(T scalar) {
+	for (size_t i = 0; i < data_.size(); i++)
+		data_[i] *= scalar;
 }

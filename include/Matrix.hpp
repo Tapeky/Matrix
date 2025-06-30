@@ -22,8 +22,12 @@ class Matrix {
 		size_t	getRows() const { return rows_ ;}
 		size_t	getCols() const { return cols_ ;}
 		bool	isSquare() const { return cols_ == rows_ ;}
-		void	print() const;	
+		void	print() const;
 
+		// Ex00 operations
+		void add(const Matrix<T>& other);
+		void sub(const Matrix<T>& other);
+		void scl(T scalar);
 };
 
 #include "../src/Matrix.tpp"
