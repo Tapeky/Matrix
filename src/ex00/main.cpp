@@ -1,13 +1,11 @@
 /**
- * Exercise 00 - Add, Subtract, Scale
- * ==================================
- * 
- * Goal: Test basic vector/matrix operations
- * - add() : addition of vectors/matrices
- * - sub() : subtraction of vectors/matrices  
- * - scl() : scalar multiplication
- * 
- * Complexity: O(n) time, O(1) space (modify in place)
+ * -----------------------------------------------------------------------
+ * Ex 00 - Add, Subtract, Scale
+ * -----------------------------------------------------------------------
+ * - Goal: Basic vector/matrix operations
+ * - Implement: add(), sub(), scl() for Vector and Matrix
+ * - Complexity: O(n) time, O(1) space
+ * -----------------------------------------------------------------------
  */
 
 #include "../../include/Vector.hpp"

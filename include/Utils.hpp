@@ -17,6 +17,16 @@ Vector<T> reshape(const Matrix<T>& mat);
 template<typename T>
 Vector<T> linear_combination(const std::vector<Vector<T>>& vec, const std::vector<T>& coeff);
 
+// ex02
+template<typename T>
+Vector<T> lerp(const Vector<T>& u, const Vector<T>& v, T t);
+
+template<typename T>
+Matrix<T> lerp(const Matrix<T>& u, const Matrix<T>& v, T t);
+
+template<typename T>
+T lerp(const T& u, const T& v, T t);
+
 #include "../src/Utils.tpp"
 
 #endif

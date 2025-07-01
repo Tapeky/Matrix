@@ -1,9 +1,18 @@
+/**
+ * -----------------------------------------------------------------------
+ * Ex 01 - Linear Combination
+ * -----------------------------------------------------------------------
+ * Goal: Compute Σ(λᵢ * vᵢ) for vectors vᵢ and scalars λᵢ
+ * Function: linear_combination(vectors, coefficients) -> Vector
+ * Complexity: O(n) time, O(n) space
+ * -----------------------------------------------------------------------
+ */
+
 #include "../../include/Vector.hpp"
 #include "../../include/Utils.hpp"
 #include <iostream>
 #include <vector>
 
-// Couleurs pour l'affichage
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
