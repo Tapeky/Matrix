@@ -29,3 +29,18 @@ Vector<T> reshape(const Matrix<T>& mat) {
 
     return result;
 }
+
+// ex01
+
+template<typename T>
+Vector<T> linear_combination(const std::vector<Vector<T>>& vec, const std::vector<T>& coeff) {
+    if (vec.size() != coeff.size()) throw std::invalid_argument ("Undefined");
+    if (vec.empty() || coeff.empty()) throw std::invalid_argument("Undefined");
+
+    Vector<T> result(vec[0].size());
+    for (size_t i = 0; i < coeff.size(); i++)
+        for (size_t j = 0; j < vec[i].size(); j++)
+            result[j] += vec[i][j] * coeff[i];
+
+    return result;
+}

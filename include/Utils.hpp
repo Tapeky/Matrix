@@ -13,6 +13,10 @@ Matrix<T> reshape(const Vector<T>& vec, size_t rows, size_t cols);
 template<typename T>
 Vector<T> reshape(const Matrix<T>& mat);
 
+// ex01
+template<typename T>
+Vector<T> linear_combination(const std::vector<Vector<T>>& vec, const std::vector<T>& coeff);
+
 #include "../src/Utils.tpp"
 
 #endif
