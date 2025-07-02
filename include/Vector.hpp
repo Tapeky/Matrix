@@ -35,6 +35,9 @@ class Vector {
 		void add(const Vector<T>& other);
 		void sub(const Vector<T>& other);
 		void scl(T scalar);
+
+		// ex03
+		T dot(const Vector<T>& other) const;
 };
 
 #include "../src/Vector.tpp"
