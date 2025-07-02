@@ -36,8 +36,13 @@ class Vector {
 		void sub(const Vector<T>& other);
 		void scl(T scalar);
 
-		// ex03
+		// ex03 (produit scalaire)
 		T dot(const Vector<T>& other) const;
+
+		// ex04 (norme)
+		T norm1() const;
+		T norm() const;
+		T norm_inf() const;
 };
 
 #include "../src/Vector.tpp"

@@ -1,4 +1,6 @@
 #include "Vector.hpp"
+#include "Utils.hpp"
+#include <limits>
 
 // Add vector to this vector (ex00)
 template<typename T>
@@ -29,7 +31,6 @@ void Vector<T>::scl(T scalar) {
 
 
 // Produit scalaire / Dot product (ex03)
-
 template<typename T>
 T Vector<T>::dot(const Vector<T>& other) const {
     if (size() != other.size()) throw std::invalid_argument("Les vecteurs n'ont pas la meme taille.");
@@ -40,4 +41,44 @@ T Vector<T>::dot(const Vector<T>& other) const {
         res += (*this)[i] * other[i];
 
     return res;
+}
+
+// Norm (ex04)
+
+// Manatthan
+template<typename T>
+T Vector<T>::norm1() const {
+    if (size() == 0) throw std::invalid_argument("Le vecteur est vide.");
+
+    T res = 0;
+    for (size_t i = 0; i < size(); i++)
+        res += my_abs((*this)[i]);
+
+    return res;
+}
+
+// Euclide
+template<typename T>
+T Vector<T>::norm() const {
+    if (size() == 0) throw std::invalid_argument("Le vecteur est vide.");
+
+    T res = 0;
+    for (size_t i = 0; i < size(); i++)
+         res += my_square((*this)[i]);
+
+    res = my_sqrt(res);
+    return res;
+}
+
+// Infinite
+template<typename T>
+T Vector<T>::norm_inf() const {
+    if (size() == 0) throw std::invalid_argument("Le vecteur est vide.");
+
+    T max = std::numeric_limits<T>::lowest();
+    
+    for (size_t i = 0; i < size(); i++)
+        if (my_abs((*this)[i]) > max) max = my_abs((*this)[i]);
+
+    return max;
 }
