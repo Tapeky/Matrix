@@ -82,3 +82,19 @@ T Vector<T>::norm_inf() const {
 
     return max;
 }
+
+// Ex05 Cosine
+template<typename T>
+T Vector<T>::angle_cos(const Vector<T>& other) const {
+    if (size() != other.size()) throw std::invalid_argument("Les vecteurs n'ont pas la meme taille.");
+    if (size() == 0) throw std::invalid_argument("Les vecteurs sont vides.");
+
+    T norm_u = this->norm();
+    T norm_v = other.norm();
+
+    if (norm_u == 0|| norm_v == 0) throw std::invalid_argument("Division par zero");
+
+    T dot_product = this->dot(other);
+    
+    return dot_product / (norm_u * norm_v);
+}

@@ -43,6 +43,9 @@ class Vector {
 		T norm1() const;
 		T norm() const;
 		T norm_inf() const;
+
+		// ex05
+		T angle_cos(const Vector<T>& other) const;
 };
 
 #include "../src/Vector.tpp"
