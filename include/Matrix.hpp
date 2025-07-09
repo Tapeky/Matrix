@@ -28,6 +28,9 @@ class Matrix {
 		void add(const Matrix<T>& other);
 		void sub(const Matrix<T>& other);
 		void scl(T scalar);
+
+		// Ex08
+		T trace() const;
 };
 
 #include "../src/Matrix.tpp"

@@ -55,3 +55,17 @@ void Matrix<T>::scl(T scalar) {
 	for (size_t i = 0; i < data_.size(); i++)
 		data_[i] *= scalar;
 }
+
+
+
+// Ex08
+template<typename T>
+T Matrix<T>::trace() const {
+	if (!isSquare()) throw std::invalid_argument ("La matrice n'est pas carre");
+
+	T res = 0;
+	for (size_t i = 0; i < rows_; i++)
+		res += (*this)(i, i);
+
+	return res;
+}
