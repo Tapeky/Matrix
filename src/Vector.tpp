@@ -98,3 +98,17 @@ T Vector<T>::angle_cos(const Vector<T>& other) const {
     
     return dot_product / (norm_u * norm_v);
 }
+
+// Ex06 (cross product)  u×v = [u₂v₃ - u₃v₂, u₃v₁ - u₁v₃, u₁v₂ - u₂v₁]
+template<typename T>
+Vector<T> Vector<T>::cross_product(const Vector<T>& other) const {
+    if (size() != 3) throw std::invalid_argument("Vecteur de mauvaise taille");
+    if (size() != other.size()) throw std::invalid_argument("Vecteur de mauvaise taille");
+
+    Vector<T> res(3);
+    res[0] = this->operator[](1) * other[2] - this->operator[](2) * other[1];
+    res[1] = this->operator[](2) * other[0] - this->operator[](0) * other[2];
+    res[2] = this->operator[](0) * other[1] - this->operator[](1) * other[0];
+
+    return res;
+}

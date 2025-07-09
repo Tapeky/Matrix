@@ -46,6 +46,9 @@ class Vector {
 
 		// ex05
 		T angle_cos(const Vector<T>& other) const;
+
+		// ex06 (cross product)
+		Vector<T> cross_product(const Vector<T>& other) const;
 };
 
 #include "../src/Vector.tpp"
