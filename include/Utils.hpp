@@ -53,6 +53,13 @@ Matrix<T> lerp(const Matrix<T>& u, const Matrix<T>& v, T t);
 template<typename T>
 T lerp(const T& u, const T& v, T t);
 
+// Ex07 operations - Matrix multiplication
+template<typename T>
+Vector<T> mul_vec(const Matrix<T>& mat, const Vector<T>& vec);
+
+template<typename T>
+Matrix<T> mul_mat(const Matrix<T>& mat1, const Matrix<T>& mat2);
+
 #include "../src/Utils.tpp"
 
 #endif

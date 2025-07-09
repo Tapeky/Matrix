@@ -99,7 +99,7 @@ T Vector<T>::angle_cos(const Vector<T>& other) const {
     return dot_product / (norm_u * norm_v);
 }
 
-// Ex06 (cross product)  u×v = [u₂v₃ - u₃v₂, u₃v₁ - u₁v₃, u₁v₂ - u₂v₁]
+// Ex06 (cross product)  u×v = [u₂v₃ - u₃v₂, u₃v₁ - u₁v₃, u₁v₂ - u₂v₁] OU ||u||.||v|| sin(u,v)
 template<typename T>
 Vector<T> Vector<T>::cross_product(const Vector<T>& other) const {
     if (size() != 3) throw std::invalid_argument("Vecteur de mauvaise taille");

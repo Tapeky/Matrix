@@ -90,3 +90,37 @@ template<typename T>
 T lerp(const T& u, const T& v, T t) {
     return u + t * (v - u);
 }
+
+
+template<typename T>
+Vector<T> mul_vec(const Matrix<T>& mat, const Vector<T>& vec) {
+    if (mat.getCols() != vec.size()) throw std::invalid_argument("Tailles incompatibles");
+
+    Vector<T> res(mat.getRows());
+    for (size_t i = 0; i < mat.getRows(); i++) {
+        T temp = 0;
+        for (size_t j = 0; j < vec.size(); j++)
+            temp += vec[j] * mat(i,j);
+        res[i] = temp;
+    }
+
+    return res;
+}
+
+template<typename T>
+Matrix<T> mul_mat(const Matrix<T>& mat1, const Matrix<T>& mat2) {
+    if (mat1.getCols() != mat2.getRows()) throw std::invalid_argument("Tailles incompatibles");
+
+    Matrix<T> res(mat1.getRows(), mat2.getCols());
+    for (size_t col = 0; col < mat2.getCols(); col++) {
+        Vector<T> column(mat2.getRows());
+        for (size_t i = 0; i < mat2.getRows(); i++)
+            column[i] = mat2(i, col);
+        
+        Vector<T> res_col = mul_vec(mat1, column);
+        for (size_t i = 0; i < res_col.size(); i++)
+            res(i,col) = res_col[i];
+    }
+
+    return res;
+}
