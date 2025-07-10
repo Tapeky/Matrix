@@ -31,6 +31,9 @@ class Matrix {
 
 		// Ex08
 		T trace() const;
+
+		// Ex09
+		Matrix<T> transpose() const;
 };
 
 #include "../src/Matrix.tpp"

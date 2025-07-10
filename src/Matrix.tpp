@@ -69,3 +69,16 @@ T Matrix<T>::trace() const {
 
 	return res;
 }
+
+
+// Ex09
+template<typename T>
+Matrix<T> Matrix<T>::transpose() const{
+	Matrix<T> res(cols_, rows_);
+
+	for (size_t i = 0; i < rows_; i++)
+		for (size_t j = 0; j < cols_; j++)
+			res(j, i) = (*this)(i, j);
+
+	return res;
+}
