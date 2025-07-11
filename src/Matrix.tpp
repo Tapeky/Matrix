@@ -134,3 +134,56 @@ Matrix<T> Matrix<T>::row_echelon() const {
 
 	return cpy;
 }
+
+
+// Ex11
+template<typename T>
+Matrix<T> Matrix<T>::row_echelon(int& swap_count) const {
+	Matrix<T> cpy = *this;
+	size_t pivot_row = 0;
+	swap_count = 0;
+	
+	for (size_t col = 0; col < cols_; col++) {
+		size_t pivot_found = pivot_row;
+		for (size_t row = pivot_row; row < rows_; row++) {
+			if (cpy(row, col) != 0) {
+				pivot_found = row;
+				break;
+			}
+		}
+
+		if (pivot_found < rows_ && cpy(pivot_found, col) != 0) {
+			if (pivot_found != pivot_row) {
+				cpy.swap_rows(pivot_row, pivot_found);
+				swap_count++;
+			}
+
+			for (size_t row = pivot_row + 1; row < rows_; row++) {
+				if (cpy(row, col) != 0) {
+					T factor = -cpy(row, col) / cpy(pivot_row, col);
+					cpy.add_row_multiple(row, pivot_row, factor);
+				}
+			}
+			pivot_row++;
+		}
+	}
+
+	return cpy;
+}
+
+template<typename T> 
+T Matrix<T>::determinant() const {
+	if (!isSquare()) throw std::invalid_argument("Le determinant n existe que pour les matrices carrees");	
+	
+	int swap_count = 0;
+	Matrix<T> cpy = this->row_echelon(swap_count);
+
+	T determinant = 1;
+	for (size_t i = 0; i < rows_; i++)
+		determinant *= cpy(i, i);
+
+	if (swap_count % 2 == 1)
+		determinant *= -1;
+
+	return determinant;
+}
