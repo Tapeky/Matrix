@@ -34,6 +34,12 @@ class Matrix {
 
 		// Ex09
 		Matrix<T> transpose() const;
+
+		// Ex10
+		void swap_rows(size_t i, size_t j);
+		void scale_row(size_t i, T scalar);
+		void add_row_multiple(size_t i, size_t j, T scalar);  // Ligne i += scalar * Ligne j
+		Matrix<T> row_echelon() const;
 };
 
 #include "../src/Matrix.tpp"

@@ -82,3 +82,55 @@ Matrix<T> Matrix<T>::transpose() const{
 
 	return res;
 }
+
+
+// Ex10
+template<typename T>
+void Matrix<T>::swap_rows(size_t i, size_t j) {
+	for (size_t k = 0; k < cols_; k++) {
+		std::swap((*this)(i, k), (*this)(j, k));
+	}
+}
+
+template<typename T>
+void Matrix<T>::scale_row(size_t i, T scalar) {
+	for (size_t k = 0; k < cols_; k++)
+		(*this)(i,k) *= scalar;
+}
+
+template<typename T>
+void Matrix<T>::add_row_multiple(size_t i, size_t j, T scalar) {
+	for (size_t k = 0; k < cols_; k++)
+		(*this)(i,k) += scalar * (*this)(j, k);
+}
+
+template<typename T>
+Matrix<T> Matrix<T>::row_echelon() const {
+	Matrix<T> cpy = *this;
+	size_t pivot_row = 0;
+	
+	for (size_t col = 0; col < cols_; col++) {
+		size_t pivot_found = pivot_row;
+		for (size_t row = pivot_row; row < rows_; row++) {
+			if (cpy(row, col) != 0) {
+				pivot_found = row;
+				break;
+			}
+		}
+
+		if (pivot_found < rows_ && cpy(pivot_found, col) != 0) {
+			if (pivot_found != pivot_row)
+				cpy.swap_rows(pivot_row, pivot_found);
+
+			for (size_t row = pivot_row + 1; row < rows_; row++) {
+				if (cpy(row, col) != 0) {
+					T factor = -cpy(row, col) / cpy(pivot_row, col);
+					cpy.add_row_multiple(row, pivot_row, factor);
+				}
+			}
+			pivot_row++;
+		}
+	}
+
+	return cpy;
+}
