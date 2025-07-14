@@ -187,3 +187,68 @@ T Matrix<T>::determinant() const {
 
 	return determinant;
 }
+
+template<typename T>
+Matrix<T> Matrix<T>::inverse() const {
+	if (!isSquare()) throw std::invalid_argument("La matrice n'est pas carre");
+	if (this->determinant() == 0) throw std::invalid_argument("Si le derterminant d'une matrice est egale a 0 alors elle n est pas reversible");
+
+	// Cree une matrice augmente [A|I]
+	Matrix<T> augmented(rows_, cols_ * 2);
+	for (size_t row = 0; row < rows_; row++) {
+		for (size_t col = 0; col < cols_ * 2; col++) {
+			if (col < cols_)
+				augmented(row, col) = (*this)(row, col);
+			else
+				augmented(row, col) = (col - cols_ == row) ? 1 : 0;
+		}
+	}
+
+	// forward_elimination
+	size_t n = rows_;
+	for (size_t col = 0; col < n; ++col) {
+		// trouve le pivot
+		size_t pivot_row = col;
+		for (size_t row = pivot_row; row < rows_; ++row) {
+			if (augmented(row, col) != 0) {
+				pivot_row = row;
+				break;
+			}
+		}
+		if (augmented(pivot_row, col) == 0)
+			throw std::runtime_error("La matrix n est pas reversible");
+
+		if (pivot_row != col)
+      		augmented.swap_rows(pivot_row, col);
+		
+		// Normaliser le pivot
+		T pivot_value = augmented(col, col);
+		augmented.scale_row(col, T(1) / pivot_value);
+
+		// Eliminer sous le pivot
+		for (size_t row = col + 1; row < n; ++row) {
+			if (augmented(row, col) != 0) {
+				T factor = -augmented(row, col);
+				augmented.add_row_multiple(row, col, factor);
+			}
+  		}
+	}
+	
+	// back_substitution
+	for (int col = n - 1; col >= 0; --col) {
+		for (int row = 0; row < col; ++row) {
+			if (augmented(row, col) != 0) {
+				T factor = -augmented(row, col);
+				augmented.add_row_multiple(row, col, factor);
+			}
+		}
+  	}
+
+	// Extraire A⁻¹ de la partie droite
+	Matrix<T> result(rows_, cols_);
+	for (size_t row = 0; row < rows_; ++row)
+		for (size_t col = 0; col < cols_; ++col)
+			result(row, col) = augmented(row, col + cols_);
+
+	return result;
+}

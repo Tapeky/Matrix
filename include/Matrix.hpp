@@ -44,6 +44,9 @@ class Matrix {
 		// Ex11
 		Matrix<T> row_echelon(int& swap_count) const;
 		T determinant() const;
+
+		// Ex12
+		Matrix<T> inverse() const;
 };
 
 #include "../src/Matrix.tpp"
