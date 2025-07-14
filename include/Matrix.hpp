@@ -47,6 +47,9 @@ class Matrix {
 
 		// Ex12
 		Matrix<T> inverse() const;
+
+		// Ex13
+		size_t rank() const;
 };
 
 #include "../src/Matrix.tpp"

@@ -252,3 +252,18 @@ Matrix<T> Matrix<T>::inverse() const {
 
 	return result;
 }
+
+// Ex13
+template<typename T>
+size_t Matrix<T>::rank() const {
+	Matrix<T> echelon = this->row_echelon();
+	size_t rank_count = 0;
+	
+	for (size_t i = 0; i < std::min(rows_, cols_); ++i) {
+		if (echelon(i, i) != 0) {
+			rank_count++;
+		}
+	}
+	
+	return rank_count;
+}
